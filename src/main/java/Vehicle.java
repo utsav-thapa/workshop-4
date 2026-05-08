@@ -18,4 +18,33 @@ public class Vehicle {
         this.odometer = odometer;
         this.price = price;
     }
+
+    public void allVehicles() {
+
+        System.out.printf("%-10d %-5d %-10s %-8s %-12s %-8s %-12d $%12.2f\n",vin,year,make,model,vehicleType,color,odometer,price);
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public int getOdometer() {
+        return odometer;
+    }
+
+    public String getVehicleType() {
+        return vehicleType;
+    }
 }
