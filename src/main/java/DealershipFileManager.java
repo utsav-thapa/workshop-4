@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 public class DealershipFileManager {
 
-    public static ArrayList<Vehicle> vehicles(String FilePath) {
-        ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+    public Dealership getDealership() {
         FileReader fileReader;
         BufferedReader bufferedReader;
 
@@ -18,8 +17,12 @@ public class DealershipFileManager {
             String dealerName = header[0];
             String dealerAddress = header[1];
             String dealerPhone = header[2];
-            System.out.printf("%-10s %-10s %-12s","Dealer","Address","Phone Number");
-            System.out.printf("%-10s %-10s %-12s",dealerName,dealerAddress,dealerPhone);
+
+            Dealership dealership = new Dealership(dealerName,dealerAddress,dealerPhone);
+
+
+//            System.out.printf("%-10s %-10s %-12s","Dealer","Address","Phone Number");
+//            System.out.printf("%-10s %-10s %-12s",dealerName,dealerAddress,dealerPhone);
 
             while (line != null) {
                 String[] eachVehicle = line.split("\\|");
@@ -33,13 +36,16 @@ public class DealershipFileManager {
                 double price = Double.parseDouble(eachVehicle[7]);
 
                 Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+
+                dealership.addVehicle(vehicle);
             }
+            return dealership;
 
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return null;
+
 
     }
 
@@ -49,7 +55,7 @@ public class DealershipFileManager {
 //        for(Vehicle s: inventory) {
 //            s.allVehicles();
 //        }
-        return inventory;
+        return null;
     }
 
 
