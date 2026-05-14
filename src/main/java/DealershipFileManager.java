@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class DealershipFileManager {
 
-    public Dealership getDealership() {
+    public static Dealership getDealership() {
         FileReader fileReader;
         BufferedReader bufferedReader;
 
@@ -55,6 +55,10 @@ public class DealershipFileManager {
 //        for(Vehicle s: inventory) {
 //            s.allVehicles();
 //        }
+        return null;
+    }
+
+    public static Dealership saveDealership(Dealership dealership){
         return null;
     }
 
