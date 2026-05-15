@@ -1,21 +1,26 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
     private Dealership dealership;
-    Scanner scanner;
+    private Scanner scanner = new Scanner(System.in);
 
     public UserInterface(){
-        this.dealership = DealershipFileManager.getDealership();
 
-    }
-    public void display(){
-        init();
     }
 
     private void init(){
-        DealershipFileManager dfm = new DealershipFileManager();
+        System.out.println("Loading dealership file.........");
+        this.dealership = DealershipFileManager.getDealership();
 
+    }
+    public void display() {
+        init();
+        displayMenu();
 
+    }
+
+    private void displayMenu() {
         String menuHeader = """
                 ===============================================
                                     Utsav's Vintage
@@ -35,7 +40,7 @@ public class UserInterface {
                 """;
         boolean running = true;
 
-        while(running) {
+        while (running) {
             System.out.println(menuHeader);
             System.out.println(mainMenu);
             int userInput = Integer.parseInt(scanner.nextLine());
@@ -73,9 +78,10 @@ public class UserInterface {
             }
 
 
-
         }
+
     }
+
 
     private void processRemoveVehicleRequest() {
     }
@@ -94,6 +100,18 @@ public class UserInterface {
     }
 
     private void processGetByColorRequest() {
+        System.out.println("What color do you want to search for?");
+        String userInput = this.scanner.nextLine();
+
+        System.out.println("wanna see partial matches?");
+        String partialMatchInput = this.scanner.nextLine();
+        boolean partialMatch = false;
+        if(partialMatchInput.equalsIgnoreCase("yes")) {
+            partialMatch = true;
+        }
+
+        ArrayList<Vehicle> vehiclesByColor = this.dealership.getVehiclesByColor(userInput, partialMatch);
+        this.displayVehicles(vehiclesByColor);
 
     }
 
@@ -107,6 +125,11 @@ public class UserInterface {
 
 
     private void processGetByPriceRequest() {
+    }
+    private void displayVehicles(ArrayList<Vehicle> vehicles) {
+        for (Vehicle v: vehicles) {
+            System.out.println(v.getCsvString());
+        }
     }
 
 

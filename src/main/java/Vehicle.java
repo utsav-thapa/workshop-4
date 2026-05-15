@@ -47,4 +47,11 @@ public class Vehicle {
     public String getVehicleType() {
         return vehicleType;
     }
+
+    public int getVin() {
+        return vin;
+    }
+    public String getCsvString() {
+        return this.getVin() + "|" + this.getYear() + "|" + this.getMake() +"|" + this.getVehicleType() + "|" + this.getColor() + "|" + this.getOdometer() + "|" + this.getPrice();
+    }
 }

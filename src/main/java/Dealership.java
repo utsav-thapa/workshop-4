@@ -12,6 +12,7 @@ public class Dealership {
         this.phone = phone;
     }
     public void addVehicle(Vehicle vehicle){
+
         this.inventory.add(vehicle);
     }
     public ArrayList<Vehicle> getAllVehicles() {
@@ -23,16 +24,36 @@ public class Dealership {
     }
 
     public ArrayList<Vehicle> getVehiclesByColor(String color) {
-        ArrayList<Vehicle> vehicles = new ArrayList<>();
+        ArrayList<Vehicle> resultList = new ArrayList<>();
 
         for (Vehicle currentVehicle : this.inventory) {
             String currentColor = currentVehicle.getColor();
 
             if (currentColor.equalsIgnoreCase(color)) {
-                vehicles.add(currentVehicle);
+                resultList.add(currentVehicle);
             }
         }
-        return vehicles;
+        return resultList;
+    }
+    public ArrayList<Vehicle> getVehiclesByColor(String color, boolean partialMatch) {
+        ArrayList<Vehicle> resultList = new ArrayList<>();
+
+        for (Vehicle currentVehicle : this.inventory) {
+            String currentColor = currentVehicle.getColor();
+            currentColor = currentColor.toLowerCase();
+
+            if (partialMatch) {
+
+                if (currentColor.contains(color.toLowerCase())) {
+                    resultList.add(currentVehicle);
+                }
+            } else {
+                if (currentColor.equalsIgnoreCase(color.toLowerCase())) {
+                    resultList.add(currentVehicle);
+                }
+            }
+        }
+        return resultList;
     }
 
     public ArrayList<Vehicle> getVehiclesByPrice(Double min, Double max){
@@ -51,4 +72,23 @@ public class Dealership {
         return inventory;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+    
+
+
+    
 }

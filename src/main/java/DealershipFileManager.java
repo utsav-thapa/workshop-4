@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DealershipFileManager {
+    private static final String fileName = "src/main/resources/inventory.csv";
 
     public static Dealership getDealership() {
         FileReader fileReader;
@@ -58,8 +59,23 @@ public class DealershipFileManager {
         return null;
     }
 
-    public static Dealership saveDealership(Dealership dealership){
-        return null;
+    public static void  saveDealership(Dealership dealership){
+        try {
+            FileWriter fileWriter = new FileWriter(DealershipFileManager.fileName);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+
+            //the first line -dealership -line
+            writer.write(dealership.getName() + "|" + dealership.getAddress() + "|" + dealership.getPhone());
+
+            // the vehicle lines
+            ArrayList<Vehicle> allVehicles = dealership.getAllVehicles();
+            for (Vehicle v: allVehicles) {
+                writer.write(v.getCsvString());
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
